@@ -5,6 +5,7 @@ import AuthCheck from "../../components/AuthCheck";
 import HeartButton from "../../components/HeartButton";
 import { useDocumentData } from "react-firebase-hooks/firestore";
 import Link from "next/link";
+import Metatags from "../../components/Metatags";
 
 export async function getStaticProps({ params }) {
   const { username, slug } = params;
@@ -55,6 +56,8 @@ export default function Post(props) {
 
   return (
     <main className={styles.container}>
+      <Metatags title={post.title} description={post.title} />
+
       <section>
         <PostContent post={post} />
       </section>

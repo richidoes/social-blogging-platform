@@ -11,7 +11,11 @@ export default function Navbar() {
 
   const signOut = () => {
     auth.signOut();
-    router.reload();
+    if (router.pathname === "/") {
+      router.reload();
+    } else {
+      router.push("/enter");
+    }
   };
 
   return (
@@ -19,7 +23,7 @@ export default function Navbar() {
       <ul>
         <li>
           <Link href="/">
-            <button className="btn-logo">FEED</button>
+            <button className="btn-logo">NXTRIC</button>
           </Link>
         </li>
 

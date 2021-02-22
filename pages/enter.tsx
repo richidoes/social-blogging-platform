@@ -1,14 +1,17 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
-import { userContext } from "../lib/context";
 import { auth, firestore, googleAuthProvider } from "../lib/firebase";
-import { debounce } from "lodash";
+import { userContext } from "../lib/context";
+import Metatags from "../components/Metatags";
+
+import { useEffect, useState, useCallback, useContext } from "react";
+import debounce from "lodash.debounce";
 import { useRouter } from "next/router";
 
-export default function EnterPage() {
+export default function Enter() {
   const { user, username } = useContext(userContext);
 
   return (
     <main>
+      <Metatags title="Enter" description="Sign up for this amazing app!" />
       {user ? (
         !username ? (
           <UsernameForm />
@@ -29,9 +32,14 @@ function SignInButton() {
   };
 
   return (
-    <button className="btn-google" onClick={signInWithGoogle}>
-      <img src={"/google.png"} /> Sign in with Google
-    </button>
+    <>
+      <button className="btn-google" onClick={signInWithGoogle}>
+        <img src={"/google.png"} width="30px" /> Sign in with Google
+      </button>
+      <button onClick={() => auth.signInAnonymously()}>
+        Sign in Anonymously
+      </button>
+    </>
   );
 }
 
@@ -47,6 +55,7 @@ function SignOutButton() {
   return <button onClick={signOut}>Sign Out</button>;
 }
 
+// Username form
 function UsernameForm() {
   const [formValue, setFormValue] = useState("");
   const [isValid, setIsValid] = useState(false);
@@ -121,7 +130,6 @@ function UsernameForm() {
           <input
             name="username"
             placeholder="myname"
-            autoComplete="false"
             value={formValue}
             onChange={onChange}
           />
