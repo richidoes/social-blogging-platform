@@ -3,10 +3,10 @@ import { userContext } from "../lib/context";
 import Metatags from "../components/Metatags";
 
 import { useEffect, useState, useCallback, useContext } from "react";
-import debounce from "lodash.debounce";
 import { useRouter } from "next/router";
+import debounce from "lodash.debounce";
 
-export default function Enter() {
+export default function Enter(props) {
   const { user, username } = useContext(userContext);
 
   return (
@@ -49,7 +49,12 @@ function SignOutButton() {
 
   const signOut = () => {
     auth.signOut();
-    router.reload();
+
+    if (router.pathname === "/") {
+      router.reload();
+    } else {
+      router.push("/enter");
+    }
   };
 
   return <button onClick={signOut}>Sign Out</button>;
