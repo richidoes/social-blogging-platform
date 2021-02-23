@@ -1,9 +1,9 @@
 import Link from "next/link";
 
-export default function PostFeed({ posts }, props) {
+export default function PostFeed({ posts, admin }) {
   return posts
     ? posts.map((post) => (
-        <PostItem post={post} key={post.slug} admin={props?.admin} />
+        <PostItem post={post} key={post.slug} admin={admin} />
       ))
     : null;
 }

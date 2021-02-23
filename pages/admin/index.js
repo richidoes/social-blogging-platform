@@ -62,7 +62,7 @@ function CreateNewPost() {
       .doc(slug);
 
     // create random number for a default uid
-    function rand(min: number, max: number) {
+    function rand(min, max) {
       let randomNum = Math.random() * (max - min) + min;
       return Math.round(randomNum);
     }
